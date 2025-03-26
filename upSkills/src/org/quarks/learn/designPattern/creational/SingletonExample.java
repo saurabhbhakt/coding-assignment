@@ -1,14 +1,18 @@
 package org.quarks.learn.designPattern.creational;
 class Singleton {
-    private static Singleton instance;
+    private static volatile Singleton instance;
 
     // Private constructor to prevent instantiation
     private Singleton() {}
 
     // Public method to provide access to the single instance
-    public static synchronized Singleton getInstance() {
+    public static Singleton getInstance() {
         if (instance == null) {
-            instance = new Singleton();
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
         }
         return instance;
     }
