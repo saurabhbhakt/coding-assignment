@@ -1,6 +1,7 @@
-# Java Threads and Multitasking
+# Java Threads and Multithreading
 
-**Multitasking** refers to the ability of an operating system or a program to perform multiple tasks concurrently. In Java, **multitasking** is achieved through the use of **threads**. A thread is the smallest unit of execution within a program, and Java provides powerful capabilities to create, manage, and control threads for performing multiple tasks concurrently.
+**Multitasking** refers to the ability of an operating system or a program to perform multiple tasks concurrently. In Java, 
+**Multithreading** is achieved through the use of **threads**. A thread is the smallest unit of execution within a program, and Java provides powerful capabilities to create, manage, and control threads for performing multiple tasks concurrently.
 
 ## 1. What is a Thread?
 A **thread** is a lightweight process that executes code in a sequence of instructions. Each thread shares the same memory space but has its own execution stack and program counter.
@@ -16,14 +17,18 @@ You can create a new thread by subclassing the `Thread` class and overriding its
 ### 2. By Implementing the `Runnable` Interface:
 Another approach is to implement the `Runnable` interface and pass it to a `Thread` object.
 
-#### Tip.
-* Use Runnable if you want better separation of concerns, reusability, and flexibility with thread management.
-* Avoid Runnable if you prefer simplicity and direct control over the thread, or if your use case doesn’t require threading to be decoupled from the thread's execution logic.
-* In most scenarios, implementing Runnable is preferred because of its modularity and flexibility. However, subclassing Thread might be suitable for simpler or more specialized tasks where you don’t need as much flexibility.
+#### When to Use Which Approach?
+| **Approach**          | **When to Use** |
+|-----------------------|----------------|
+| **Thread Class**      | When you need full control over the thread and don’t need to extend another class. Less preferred due to single inheritance limitation. |
+| **Runnable Interface** | When you want better modularity, flexibility, and reusability. Recommended for most cases as it allows implementing other interfaces or extending other classes. |
+| **Lambda (Java 8+)**  | When using Runnable in a short, one-time-use scenario, making code more concise and readable. Ideal for functional programming style. |
 
 ## 3.Thread Life Cycle
 
 A thread goes through various states during its lifetime:
+
+![img.png](../../../../../../resourses/img.png)
 
 1. **New**:
     - A thread is in the "new" state when it is created but has not yet started.
@@ -71,19 +76,7 @@ There are two main types of multitasking:
 - **Simplified Program Design**:
     - For tasks like server programs, GUI applications, etc., multithreading can be a natural fit for managing different tasks concurrently.
 
-## 7. Thread Synchronization
-
-In Java, synchronization is used to control the access of multiple threads to shared resources. When multiple threads access shared resources, there could be conflicts or inconsistencies if not properly managed.
-
-### Why Synchronization?
-
-- **Data Integrity**:
-    - If one thread is modifying data while another thread is reading the same data, synchronization ensures that the data is not corrupted.
-
-- **Concurrency**:
-    - Threads that need to access shared resources must wait for other threads to finish their operations.
-
-## 8. Thread Communication
+## 7. Thread Communication
 
 Java provides a way for threads to communicate with each other through inter-thread communication. This is useful when you want threads to cooperate or wait for certain conditions.
 
@@ -97,4 +90,18 @@ Java provides a way for threads to communicate with each other through inter-thr
 
 - **notifyAll()**:
     - Wakes up all threads that are waiting on the object's monitor.
+
+## 8. Thread Synchronization
+
+In Java, synchronization is used to control the access of multiple threads to shared resources. When multiple threads access shared resources, there could be conflicts or inconsistencies if not properly managed.
+
+### Why Synchronization?
+
+- **Data Integrity**:
+    - If one thread is modifying data while another thread is reading the same data, synchronization ensures that the data is not corrupted.
+
+- **Concurrency**:
+    - Threads that need to access shared resources must wait for other threads to finish their operations.
+
+### [Synchronizers](../synchronizers/synchronizers.md)
 
